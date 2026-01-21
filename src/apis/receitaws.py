@@ -1,4 +1,4 @@
-from utils.formatter import format_name, suffix_remover, format_phone
+from utils.formatter import format_name, suffix_remover, format_zipcode, format_phone
 import requests
 
 
@@ -16,7 +16,7 @@ def cnpj_lookup(companyId: str, code: str, type: int, cnpj: str, stateRegister: 
         "name": format_name(resp["nome"]),
         "mainNIF": resp["cnpj"].strip(),
         "stateRegister": stateRegister,
-        "zipCode": resp["cep"].replace(".", "").replace("-", "").strip(),
+        "zipCode": format_zipcode(resp["cep"]),
         "streetType": None,  # Formatar
         "streetName": resp["logradouro"].title().strip(),  # Formatar
         "number": resp["numero"].upper().strip(),

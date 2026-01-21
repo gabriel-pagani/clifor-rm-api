@@ -32,6 +32,10 @@ def suffix_remover(text: str) -> str:
     return text
 
 
+def format_zipcode(zipCode: str) -> str:
+    return zipCode.replace(".", "").replace("-", "").strip()
+
+
 def format_phone(phone: str) -> str:
     phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
     phone = phone.split("/")[0].strip()  # usa apenas o primeiro quando houver mais de um
