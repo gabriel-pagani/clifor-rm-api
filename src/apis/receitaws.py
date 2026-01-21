@@ -10,7 +10,7 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
         "companyId": codcoligada,
         "code": codcfo,
         "type": 3 if codcfo.upper().startswith('C') else 2,
-        "contributor": 2 if ie and ie.strip().lower() == "isento" else (1 if ie else 0),
+        "contributor": 2 if ie and "isento" in ie.strip().lower() else (1 if ie else 0),
 
         "shortName": suffix_remover(format_name(resp["fantasia"])) if resp["fantasia"] else suffix_remover(format_name(resp["nome"])),
         "name": format_name(resp["nome"]),
