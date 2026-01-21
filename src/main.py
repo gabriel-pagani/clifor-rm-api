@@ -17,7 +17,6 @@ create_new_customer_vendor(
     number=resp["number"],
     districtType=resp["districtType"],
     district=resp["district"],
-    countryInternalId=resp["countryInternalId"],
     stateCode=resp["stateCode"],
     cityInternalId=resp["cityInternalId"],
     phoneNumber=resp["phoneNumber"],

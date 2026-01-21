@@ -21,7 +21,6 @@ def cnpj_lookup(companyId: str, code: str, type: int, contributor: int, cnpj: st
         "number": resp["numero"].upper().strip(),
         "districtType": None,
         "district": resp["bairro"].title().strip(),
-        "countryInternalId": None,
         "stateCode": resp["uf"].upper().strip(),
         "cityInternalId": None,
         "phoneNumber": resp["telefone"].replace("(", "").replace(")", "").replace(" ", "").replace("-", "").strip(),
