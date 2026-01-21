@@ -30,3 +30,9 @@ def suffix_remover(text: str) -> str:
     # Normaliza espaços após a remoção
     text = re.sub(r"\s+", " ", text).strip()
     return text
+
+
+def format_phone(phone: str) -> str:
+    phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
+    phone = phone.split("/")[0].strip()  # usa apenas o primeiro quando houver mais de um
+    return phone
