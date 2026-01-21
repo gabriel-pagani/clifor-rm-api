@@ -20,7 +20,7 @@ def main():
         payload = json.load(j)
 
     resp = session.post(api_url, json=payload, timeout=30)
-    print(resp.text)
+    print(resp.status_code)
     resp.raise_for_status()
 
 
