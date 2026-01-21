@@ -20,3 +20,13 @@ def format_name(name: str) -> str:
 
     name = re.sub(r"\s+", " ", name).strip()  # Colapsa espaços repetidos
     return name
+
+
+def suffix_remover(text: str) -> str:
+    # Remove "Sa", "S A" e "Ltda" em qualquer posição (como palavra), com ou sem ponto
+    pattern = re.compile(r"(?:\bLtda\b\.?|\bSa\b\.?|\bS\s+A\b\.?)", flags=re.IGNORECASE)
+    text = pattern.sub(" ", text)
+
+    # Normaliza espaços após a remoção
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
