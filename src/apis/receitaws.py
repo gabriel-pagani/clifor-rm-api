@@ -1,4 +1,4 @@
-from utils.formatter import format_name, suffix_remover, format_zipcode, format_street, format_phone
+from utils.formatter import format_name, suffix_remover, format_zipcode, format_street, format_district, format_phone
 import requests
 
 
@@ -20,8 +20,8 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
         "streetType": format_street(resp["logradouro"])[0],
         "streetName": format_street(resp["logradouro"])[1],
         "number": resp["numero"].upper().strip(),
-        "districtType": "",  # Formatar
-        "district": resp["bairro"].title().strip(),  # Formatar
+        "districtType": format_district(resp["bairro"])[0],
+        "district": format_district(resp["bairro"])[1],
         "stateCode": resp["uf"].upper().strip(),
         "cityInternalId": "",  # Formatar
         "phoneNumber": format_phone(resp["telefone"]),

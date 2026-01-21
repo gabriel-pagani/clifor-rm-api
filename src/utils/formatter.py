@@ -57,6 +57,38 @@ def format_street(street: str) -> list:
         return ["Rua", street.title()]
 
 
+def format_district(district: str) -> list:
+    district = district.strip().upper()
+    district_type = district.split()[0]
+    
+    district_types = {
+        "JARDIM": "Jardim",
+        "VILA": "Vila",
+        "ZONA": "Zona",
+        "PARQUE": "Parque",
+        "RESIDENCIAL": "Residencial",
+        "SITIO": "Sitio",
+        "NUCLEO": "Nucleo",
+        "LOTEAMENTO": "Loteamento",
+        "HORTO": "Horto",
+        "GLEBA": "Gleba",
+        "FAZENDA": "Fazenda",
+        "DISTRITO": "Distrito",
+        "CONJUNTO": "Conjunto",
+        "CHACARA": "Chacara",
+        "BOSQUE": "Bosque",
+        "SRV": "Servidao",
+        # Adicionar mais conforme necessário
+    }
+
+    if district_type in district_types:
+        district = re.sub(f"{district_type} ", "", district)
+        district_type = district_types[district_type]
+        return [district_type, district.title()]
+    else:
+        return ["Bairro", district.title()]
+
+
 def format_phone(phone: str) -> str:
     phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
     phone = phone.split("/")[0].strip()  # usa apenas o primeiro quando houver mais de um
