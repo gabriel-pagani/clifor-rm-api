@@ -26,6 +26,9 @@ def format_name(name: str) -> str:
 
 
 def suffix_remover(text: str) -> str:
+    if not text:
+        return ""
+    
     # Remove "Sa", "S A" e "Ltda" em qualquer posição (como palavra), com ou sem ponto
     pattern = re.compile(r"(?:\bLtda\b\.?|\bSa\b\.?|\bS\s+A\b\.?)", flags=re.IGNORECASE)
     text = pattern.sub(" ", text)
