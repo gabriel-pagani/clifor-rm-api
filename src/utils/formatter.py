@@ -45,7 +45,6 @@ def format_zipcode(zipCode: str) -> str:
     return zipCode.replace(".", "").replace("-", "").strip()
 
 
-# Conferir os tipos de ruas
 def format_street(street: str) -> list:
     if not street:
         return ["", ""]
@@ -54,11 +53,58 @@ def format_street(street: str) -> list:
     street_type = street.split()[0]
     
     street_types = {
-        "AV": "Avenida",
-        "R": "Rua",
-        "ROD": "Rodovia",
-        "EST": "Estrada",
-        "AL": "Alameda",
+        "ACESSO": "2",
+        "AEROPORTO": "3",
+        "ALAMEDA": "4",
+        "ATALHO": "5",
+        "AVENIDA": "6",
+        "AV": "6",
+        "BECO": "7",
+        "BOULEVARD": "8",
+        "CAMINHO": "9",
+        "CAMPO": "12",
+        "CHACARA": "10",
+        "CONJUNTO": "11",
+        "CORREDOR": "13",
+        "DESVIO": "48",
+        "ENTRONCAM.": "14",
+        "ESPLANADA": "15",
+        "ESTACAO": "17",
+        "ESTIVA": "16",
+        "ESTRADA": "18",
+        "FAZENDA": "19",
+        "FERROVIA": "20",
+        "GALERIA": "21",
+        "JARDIM": "22",
+        "LADEIRA": "23",
+        "LAGO": "24",
+        "LAGOA": "25",
+        "LARGE": "26",
+        "LOGRADOURO": "49",
+        "MARGINAL": "50",
+        "MORRO": "27",
+        "PARQUE": "28",
+        "PASSAGEM": "29",
+        "PASSEIO": "33",
+        "PORTO": "32",
+        "PRACA": "30",
+        "PRAIA": "31",
+        "RIO": "36",
+        "RODOVIA": "34",
+        "ROD": "34",
+        "RUA": "1",
+        "R": "1",
+        "RUELA": "35",
+        "SERVIDAO": "46",
+        "SITIO": "37",
+        "SUP QUADRA": "38",
+        "TRAVESSA": "39",
+        "VALE": "40",
+        "VARGEM": "45",
+        "VIA": "43",
+        "VIADUTO": "41",
+        "VIELA": "42",
+        "VILA": "44",
         # Adicionar mais conforme necessário
     }
 
@@ -67,10 +113,9 @@ def format_street(street: str) -> list:
         street_type = street_types[street_type]
         return [street_type, street.title()]
     else:
-        return ["Rua", street.title()]
+        return ["1", street.title()]
 
 
-# Conferir os tipos de bairros
 def format_district(district: str) -> list:
     if not district:
         return ["", ""]
@@ -79,22 +124,25 @@ def format_district(district: str) -> list:
     district_type = district.split()[0]
     
     district_types = {
-        "JARDIM": "Jardim",
-        "VILA": "Vila",
-        "ZONA": "Zona",
-        "PARQUE": "Parque",
-        "RESIDENCIAL": "Residencial",
-        "SITIO": "Sitio",
-        "NUCLEO": "Nucleo",
-        "LOTEAMENTO": "Loteamento",
-        "HORTO": "Horto",
-        "GLEBA": "Gleba",
-        "FAZENDA": "Fazenda",
-        "DISTRITO": "Distrito",
-        "CONJUNTO": "Conjunto",
-        "CHACARA": "Chacara",
-        "BOSQUE": "Bosque",
-        "SRV": "Servidao",
+        "BAIRRO": "1",
+        "BOSQUE": "2",
+        "CHACARA": "3",
+        "CONJUNTO": "4",
+        "DESMEMB.": "5",
+        "DISTRITO": "6",
+        "FAVELA": "7",
+        "FAZENDA": "8",
+        "GLEBA": "9",
+        "HORTO": "10",
+        "JARDIM": "11",
+        "LOTEAMENTO": "12",
+        "NUCLEO": "13",
+        "PARQUE": "14",
+        "RESIDENC.": "15",
+        "SITIO": "16",
+        "TROPICAL": "17",
+        "VILA": "18",
+        "ZONA": "19",
         # Adicionar mais conforme necessário
     }
 
@@ -103,7 +151,7 @@ def format_district(district: str) -> list:
         district_type = district_types[district_type]
         return [district_type, district.title()]
     else:
-        return ["Bairro", district.title()]
+        return ["1", district.title()]
 
 
 def format_phone(phone: str) -> str:
