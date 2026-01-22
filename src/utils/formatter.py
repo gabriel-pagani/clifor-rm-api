@@ -52,11 +52,13 @@ def format_street(street: str) -> list:
     if not street:
         return ["", ""]
     
-    street = street.strip().upper()
+    # remove pontuação e normaliza espaços
+    street = re.sub(r"[^\w\s]", " ", street, flags=re.UNICODE)
+    street = re.sub(r"\s+", " ", street).strip().upper()
     street_type = street.split()[0]
     
     if street_type in street_types:
-        street = re.sub(f'{street_type} ', '', street)
+        street = re.sub(rf"^{re.escape(street_type)}\s+", "", street)
         street_type = street_types[street_type]
         return [street_type, street.title()]
     else:
