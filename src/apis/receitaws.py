@@ -9,11 +9,9 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
     response = {
         "companyId": codcoligada,
         "code": codcfo,
-        "type": 3 if codcfo.upper().startswith('C') else 2,  # Conferir os tipos de cadastro
-        "contributor": 2 if ie and "isento" in ie.lower() else (1 if ie else 0),  # 0 = Não contribuinte | 1 = Contribuinte | 2 = Isento
-
         "shortName": suffix_remover(format_name(resp["fantasia"])) if resp["fantasia"] else suffix_remover(format_name(resp["nome"])),
         "name": format_name(resp["nome"]),
+        "type": 3 if codcfo.upper().startswith('C') else 2,  # Conferir os tipos de cadastro
         "mainNIF": resp["cnpj"].strip(),
         "stateRegister": ie if ie and "isento" not in ie.lower() else "",
         "zipCode": format_zipcode(resp["cep"]),
@@ -25,7 +23,8 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
         "stateCode": resp["uf"].upper().strip(),
         "cityInternalId": "",  # Formatar
         "phoneNumber": format_phone(resp["telefone"]),
-        "email": resp["email"].lower().strip()
+        "email": resp["email"].lower().strip(),
+        "contributor": 2 if ie and "isento" in ie.lower() else (1 if ie else 0)  # 0 = Não contribuinte | 1 = Contribuinte | 2 = Isento
     }
     
     return response
