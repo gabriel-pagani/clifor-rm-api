@@ -4445,7 +4445,7 @@ municipalities = {
     ("BALNEARIO BARRA DO SUL", "SC"): "02057",
     ("BALNEARIO CAMBORIU", "SC"): "02008",
     ("BALNEARIO GAIVOTA", "SC"): "02073",
-    ("BALNEARIO PICARRAS", "SC"): "12809",
+    ("BALNEARIO DE PICARRAS", "SC"): "12809",
     ("BALNEARIO RINCAO", "SC"): "20000",
     ("BANDEIRANTE", "SC"): "02081",
     ("BARRA BONITA", "SC"): "02099",
