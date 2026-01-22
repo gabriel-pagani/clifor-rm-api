@@ -69,17 +69,11 @@ def format_number(number: str) -> str:
     if not number:
         return ""
 
-    cleaned = number.upper().strip()
-
-    # remove pontuação e colapsa espaços
-    cleaned = re.sub(r"[^\w\s]", " ", cleaned, flags=re.UNICODE)
-    cleaned = re.sub(r"\s+", " ", cleaned).strip()
-
     # se não tem dígito retorna ""
-    if not re.search(r"\d", cleaned):
+    if not re.search(r"\d", number):
         return ""
 
-    return cleaned
+    return number.upper().strip()
 
 
 def format_district(district: str) -> list:
