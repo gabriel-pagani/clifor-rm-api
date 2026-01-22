@@ -10,12 +10,12 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
         "companyId": codcoligada,
         "code": codcfo,
         "type": 3 if codcfo.upper().startswith('C') else 2,  # Conferir os tipos de cadastro
-        "contributor": 2 if ie and "isento" in ie.strip().lower() else (1 if ie else 0),  # 0 = Não contribuinte | 1 = Contribuinte | 2 = Isento
+        "contributor": 2 if ie and "isento" in ie.lower() else (1 if ie else 0),  # 0 = Não contribuinte | 1 = Contribuinte | 2 = Isento
 
         "shortName": suffix_remover(format_name(resp["fantasia"])) if resp["fantasia"] else suffix_remover(format_name(resp["nome"])),
         "name": format_name(resp["nome"]),
         "mainNIF": resp["cnpj"].strip(),
-        "stateRegister": ie,
+        "stateRegister": ie if ie and "isento" not in ie.lower() else "",
         "zipCode": format_zipcode(resp["cep"]),
         "streetType": format_street(resp["logradouro"])[0],
         "streetName": format_street(resp["logradouro"])[1],
