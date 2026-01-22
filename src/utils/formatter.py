@@ -3,6 +3,9 @@ import re
 
 
 def format_name(name: str) -> str:
+    if not name:
+        return ""
+    
     name = name.strip()
 
     name = re.sub(r" & ", " e ", name)
@@ -23,6 +26,9 @@ def format_name(name: str) -> str:
 
 
 def suffix_remover(text: str) -> str:
+    if not text:
+        return ""
+    
     # Remove "Sa", "S A" e "Ltda" em qualquer posição (como palavra), com ou sem ponto
     pattern = re.compile(r"(?:\bLtda\b\.?|\bSa\b\.?|\bS\s+A\b\.?)", flags=re.IGNORECASE)
     text = pattern.sub(" ", text)
@@ -33,11 +39,17 @@ def suffix_remover(text: str) -> str:
 
 
 def format_zipcode(zipCode: str) -> str:
+    if not zipCode:
+        return ""
+    
     return zipCode.replace(".", "").replace("-", "").strip()
 
 
 # Conferir os tipos de ruas
 def format_street(street: str) -> list:
+    if not street:
+        return ["", ""]
+    
     street = street.strip().upper()
     street_type = street.split()[0]
     
@@ -60,6 +72,9 @@ def format_street(street: str) -> list:
 
 # Conferir os tipos de bairros
 def format_district(district: str) -> list:
+    if not district:
+        return ["", ""]
+    
     district = district.strip().upper()
     district_type = district.split()[0]
     
@@ -92,6 +107,9 @@ def format_district(district: str) -> list:
 
 
 def format_phone(phone: str) -> str:
+    if not phone:
+        return ""
+    
     phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
     phone = phone.split("/")[0].strip()  # usa apenas o primeiro quando houver mais de um
     return phone
