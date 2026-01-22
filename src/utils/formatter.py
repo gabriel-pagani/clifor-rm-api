@@ -80,9 +80,21 @@ def format_district(district: str) -> list:
         return ["1", district.title()]
 
 
-def format_municipality(municipality: str, state: str):
+def format_municipality(municipality: str, state: str) -> str:
     from constants.municipalities import municipalities
-    ...
+    
+    if not municipality or not state:
+        return ""
+
+    key = municipality.upper().strip()
+    state = state.upper().strip()
+
+    value = municipalities.get(key)
+    if not value:
+        return ""
+
+    codmun, uf = value
+    return codmun if uf == state else ""
 
 
 def format_phone(phone: str) -> str:
