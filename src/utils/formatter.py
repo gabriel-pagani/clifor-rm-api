@@ -101,14 +101,10 @@ def format_municipality(municipality: str, state: str) -> str:
     if not municipality or not state:
         return ""
 
-    key = municipality.upper().strip()
-    value = municipalities.get(key)
-    if not value:
-        return ""
-
-    codmun, uf = value
-    return codmun if uf == state.upper().strip() else ""
-
+    key = (municipality.upper().strip(), state.upper().strip())
+    codmun = municipalities.get(key)
+    
+    return codmun if codmun else ""
 
 def format_phone(phone: str) -> str:
     if not phone:
