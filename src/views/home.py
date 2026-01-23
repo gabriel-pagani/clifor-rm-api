@@ -1,6 +1,7 @@
 import flet as ft
 import time
 import datetime
+import asyncio
 from utils.ui import show_message
 from utils.validator import is_valid_cnpj
 from apis.receitaws import cnpj_lookup
@@ -146,14 +147,17 @@ class HomeView:
             logs.controls.append(
                 ft.Text(f"[{now}] {message}", color=color, selectable=True, size=14)
             )
+            logs.scroll_to(offset=-1, duration=1000)
             logs.update()
         
         async def run_automation_tesk():
             add_log("Iniciando automação...", "info")
+            await asyncio.sleep(0.1)
             
             len_customers_vendors = len(self.customers_vendors)
-            for cnpj, infos in self.customers_vendors.items():
+            for i, (cnpj, infos) in enumerate(self.customers_vendors.items()):
                 add_log(f"Cadastrando o cliente/fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}...", "info")
+                await asyncio.sleep(0.1)
                 
                 try:
                     data = execute_query("""
@@ -191,8 +195,11 @@ class HomeView:
                 except Exception as e:
                     add_log(f"Erro ao cadastrar o cliente/fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! ERRO: {e}", "error")
                 
-                if len_customers_vendors > 3:
-                    time.sleep(20)
+                await asyncio.sleep(0.1)
+                
+                if len_customers_vendors > 3 and i < len_customers_vendors - 1:
+                    add_log("Aguardando 20s...", "warning")
+                    await asyncio.sleep(20)
 
             enable_ui()
 
@@ -200,7 +207,8 @@ class HomeView:
             update_list_of_cnpjs()
             
             self.page.update()
-            show_message(self.page, 1, "Automação finalizada!")
+            add_log("Automação finalizada!", "success")
+            await asyncio.sleep(0.1)
         
         def start_automation(e):
             if not self.customers_vendors:
