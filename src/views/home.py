@@ -105,12 +105,14 @@ class HomeView:
         cnpj_input = ft.TextField(
             label="Cnpj",
             expand=True,
+            input_filter=ft.NumbersOnlyInputFilter(),
             on_submit=add_cnpj_to_list,
         )
 
         ie_input = ft.TextField(
             label="IE",
             expand=True,
+            input_filter=ft.NumbersOnlyInputFilter(),
             on_submit=add_cnpj_to_list,
         )
 
