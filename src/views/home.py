@@ -1,6 +1,8 @@
 import flet as ft
 from utils.ui import show_message
 from utils.validator import is_valid_cnpj
+from apis.receitaws import cnpj_lookup
+from apis.customer_vendor import create_new_customer_vendor
 
 
 class HomeView:
@@ -97,7 +99,11 @@ class HomeView:
             ...
         
         def start_automation(e):
-            ...
+            if not self.customers_vendors:
+                show_message(self.page, 2, "A lista de cnpjs está vazia!")
+                return
+            
+            self.page.run_task(run_automation_tesk)
 
 
         # Components
