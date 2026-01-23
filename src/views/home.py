@@ -71,6 +71,10 @@ class HomeView:
             on_click=add_cnpj,
         )
 
+        list_of_cnpjs = ...
+
+        logs = ...
+
         # Layout
         cnpj_form = ft.Row(
             controls=[
