@@ -1,5 +1,6 @@
 import flet as ft
 import time
+import datetime
 from utils.ui import show_message
 from utils.validator import is_valid_cnpj
 from apis.receitaws import cnpj_lookup
@@ -127,7 +128,25 @@ class HomeView:
                 container.content.controls[2].disabled = False
                 container.content.controls[2].tooltip = "Remover cnpj"
         
+        def add_log(message: str, type: str = "info"):
+            now = datetime.datetime.now().strftime("%H:%M:%S")
+            color = ft.Colors.BLACK
+            
+            if type == "success":
+                color = ft.Colors.GREEN
+            elif type == "warning":
+                color = ft.Colors.ORANGE
+            elif type == "error":
+                color = ft.Colors.RED
+            
+            logs.controls.append(
+                ft.Text(f"[{now}] {message}", color=color, selectable=True, size=14)
+            )
+            logs.update()
+        
         async def run_automation_tesk():
+            add_log("Iniciando automação...", "info")
+            
             len_customers_vendors = len(self.customers_vendors)
             for cnpj, infos in self.customers_vendors.items():
                 try:
