@@ -26,7 +26,7 @@ class HomeView:
                                 ft.IconButton(
                                     icon=ft.Icons.DELETE,
                                     icon_color=ft.Colors.RED,
-                                    tooltip="Remove cnpj",
+                                    tooltip="Remover cnpj",
                                     on_click=lambda e, cj=cnpj: remove_cnpj_from_list(cj)
                                 )
                             ],
@@ -48,19 +48,19 @@ class HomeView:
             has_error = False
 
             if not codcoligada_input.value:
-                codcoligada_input.error_text = "Required field!"
+                codcoligada_input.error_text = "Campo obrigatório!"
                 has_error = True
 
             if not cnpj_input.value:
-                cnpj_input.error = "Required field!"
+                cnpj_input.error = "Campo obrigatório!"
                 has_error = True
 
             if cnpj_input.value.strip() in self.customers_vendors:
-                cnpj_input.error = "This cnpj has already been added!"
+                cnpj_input.error = "Esse cnpj já foi adicionado!"
                 has_error = True
             
             if not type_input.value:
-                type_input.error_text = "Required field!"
+                type_input.error_text = "Campo obrigatório!"
                 has_error = True
 
             if has_error:
@@ -80,21 +80,21 @@ class HomeView:
             ie_input.value = ""
             
             update_list_of_cnpjs()
-            show_message(self.page, 1, "Cnpj added successfully!")
+            show_message(self.page, 1, "Cnpj adicionado com sucesso!")
 
         def remove_cnpj_from_list(cnpj):
             if cnpj in self.customers_vendors:
                 del self.customers_vendors[cnpj]
                 update_list_of_cnpjs()
-                show_message(self.page, 1, "Cnpj successfully removed!")
+                show_message(self.page, 1, "Cnpj removido com sucesso!")
 
         def start_automation(e):
             ...
 
         # Components
         codcoligada_input = ft.Dropdown(
-            label="Affiliate",
-            width=150,
+            label="Coligada",
+            width=200,
             options=[
                 ft.dropdown.Option("5", "Sinasc"),
                 ft.dropdown.Option("6", "ICD"),
@@ -117,11 +117,11 @@ class HomeView:
         )
 
         type_input = ft.Dropdown(
-            label="Type",
-            width=150,
+            label="Tipo",
+            width=200,
             options=[
-                ft.dropdown.Option("c", "Customer"),
-                ft.dropdown.Option("f", "Vendor"),
+                ft.dropdown.Option("c", "Cliente"),
+                ft.dropdown.Option("f", "Fornecedor"),
             ]
         )
 
@@ -129,19 +129,12 @@ class HomeView:
             icon=ft.Icons.ADD_CIRCLE,
             icon_color=ft.Colors.GREEN,
             icon_size=40,
-            tooltip="Add cnpj",
+            tooltip="Adicionar cnpj",
             on_click=add_cnpj_to_list,
         )
 
-        remove_cnpj_button = ft.IconButton(
-            icon=ft.Icons.DELETE,
-            icon_size=30,
-            tooltip="Remove cnpj",
-            on_click=remove_cnpj_from_list,
-        )
-
         start_automation_button = ft.Button(
-            content=ft.Text("Start automation"),
+            content=ft.Text("Iniciar automação"),
             height=50,
             bgcolor=ft.Colors.GREY_900,
             color=ft.Colors.WHITE,
@@ -183,7 +176,7 @@ class HomeView:
                     bgcolor=ft.Colors.TRANSPARENT,
                     border_radius=10
                 ),
-                ft.Text("Customers/Vendors:", size=16, weight="bold"),
+                ft.Text("Clientes/Fornecedores:", size=16, weight="bold"),
                 ft.Container(
                     content=list_of_cnpjs,
                     expand=True,
