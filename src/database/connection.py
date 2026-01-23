@@ -18,4 +18,4 @@ def execute_query(query: str) -> dict:
             return data
 
     except Exception as e:
-        print(f"request-exception: {e}")
+        raise e
