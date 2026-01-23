@@ -1,4 +1,5 @@
 import requests
+import time
 from utils.formatter import (
     format_name, 
     suffix_remover, 
@@ -41,4 +42,5 @@ def cnpj_lookup(codcoligada: str, codcfo: str, cnpj: str, ie: str = ""):
         "contributor": 2 if ie and "isento" in ie.lower() else (1 if ie else 0)  # 0 = Não contribuinte | 1 = Contribuinte | 2 = Isento
     }
     
+    time.sleep(20)
     return response
