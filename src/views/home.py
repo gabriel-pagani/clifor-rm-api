@@ -9,6 +9,12 @@ class HomeView:
         self.customers_vendors = dict()
     
     def show(self):
+        def add_cnpj(e):
+            ...
+
+        def remove_cnpj(cnpj):
+            ...
+
         def start_automation(e):
             ...
 
