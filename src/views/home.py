@@ -277,7 +277,7 @@ class HomeView:
                     bgcolor=ft.Colors.TRANSPARENT,
                     border_radius=10
                 ),
-                ft.Text("Clientes/Fornecedores:", size=16, weight="bold"),
+                ft.Text("Clientes/Fornecedores:", size=16, weight="bold", color=ft.Colors.GREY_900),
                 ft.Container(
                     content=list_of_cnpjs,
                     expand=True,
@@ -285,7 +285,7 @@ class HomeView:
                     border_radius=8,
                     padding=5
                 ),
-                ft.Text("Logs:", size=16, weight="bold"),
+                ft.Text("Logs:", size=16, weight="bold", color=ft.Colors.GREY_900),
                 ft.Container(
                     content=logs,
                     height=150,
