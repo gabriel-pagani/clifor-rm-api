@@ -1,5 +1,5 @@
 [project]
-name = "CustomerVendor Automation"
+name = "Customer Vendor Automation"
 version = "0.1.0"
 description = "Automation customer and vendor registration within Totvs RM using the RM API"
 readme = "README.md"
@@ -21,7 +21,7 @@ dev = [
 
 [tool.flet]
 org = "com.gabrielpagani"
-product = "CustomerVendor Automation"
+product = "Customer Vendor Automation"
 company = "Gabriel Pagani"
 copyright = "Copyright (C) 2026 by Gabriel Pagani"
 
