@@ -198,7 +198,7 @@ class HomeView:
                 await asyncio.sleep(0.1)
                 
                 if len_customers_vendors > 3 and i < len_customers_vendors - 1:
-                    add_log("Aguardando 20s...", "warning")
+                    add_log("Aguardando 20s...", "info")
                     await asyncio.sleep(20)
 
             enable_ui()
