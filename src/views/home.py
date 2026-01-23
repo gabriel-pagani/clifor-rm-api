@@ -97,7 +97,7 @@ class HomeView:
                 update_list_of_cnpjs()
                 show_message(self.page, 1, "Cnpj removido com sucesso!")
 
-        async def run_automation_tesk():
+        def disable_ui():
             codcoligada_input.disabled = True
             cnpj_input.disabled = True
             ie_input.disabled = True
@@ -113,6 +113,21 @@ class HomeView:
             
             self.page.update()
 
+        def enable_ui():
+            codcoligada_input.disabled = False
+            cnpj_input.disabled = False
+            ie_input.disabled = False
+            type_input.disabled = False
+            add_cnpj_button.disabled = False
+            add_cnpj_button.tooltip = "Adicionar cnpj"
+            start_automation_button.disabled = False
+            start_automation_button.tooltip = None
+
+            for container in list_of_cnpjs.controls:
+                container.content.controls[2].disabled = False
+                container.content.controls[2].tooltip = "Remover cnpj"
+        
+        async def run_automation_tesk():
             len_customers_vendors = len(self.customers_vendors)
             for cnpj, infos in self.customers_vendors.items():
                 try:
@@ -152,18 +167,7 @@ class HomeView:
                 if len_customers_vendors > 3:
                     time.sleep(20)
 
-            codcoligada_input.disabled = False
-            cnpj_input.disabled = False
-            ie_input.disabled = False
-            type_input.disabled = False
-            add_cnpj_button.disabled = False
-            add_cnpj_button.tooltip = "Adicionar cnpj"
-            start_automation_button.disabled = False
-            start_automation_button.tooltip = None
-
-            for container in list_of_cnpjs.controls:
-                container.content.controls[2].disabled = False
-                container.content.controls[2].tooltip = "Remover cnpj"
+            enable_ui()
 
             self.customers_vendors = dict()
             update_list_of_cnpjs()
@@ -175,6 +179,8 @@ class HomeView:
             if not self.customers_vendors:
                 show_message(self.page, 2, "A lista de cnpjs está vazia!")
                 return
+            
+            disable_ui()
             
             self.page.run_task(run_automation_tesk)
 
