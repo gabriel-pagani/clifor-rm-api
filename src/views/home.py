@@ -1,5 +1,6 @@
 import flet as ft
 from utils.ui import show_message
+from utils.validator import is_valid_cnpj
 
 
 class HomeView:
@@ -55,8 +56,12 @@ class HomeView:
                 cnpj_input.error = "Campo obrigatório!"
                 has_error = True
 
-            if cnpj_input.value.strip() in self.customers_vendors:
+            if cnpj_input.value in self.customers_vendors:
                 cnpj_input.error = "Esse cnpj já foi adicionado!"
+                has_error = True
+
+            if not is_valid_cnpj(cnpj_input.value):
+                cnpj_input.error = "Cnpj inválido!"
                 has_error = True
             
             if not type_input.value:
