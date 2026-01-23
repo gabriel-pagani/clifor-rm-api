@@ -150,10 +150,6 @@ class HomeView:
                     if len_customers_vendors > 3:
                         time.sleep(20)
 
-                    if cnpj in self.customers_vendors:
-                        del self.customers_vendors[cnpj]
-                        update_list_of_cnpjs()
-
                 except Exception as e:
                     print(f"exception: {e}")
 
@@ -169,6 +165,9 @@ class HomeView:
             for container in list_of_cnpjs.controls:
                 container.content.controls[2].disabled = False
                 container.content.controls[2].tooltip = "Remover cnpj"
+
+            self.customers_vendors = dict()
+            update_list_of_cnpjs()
             
             self.page.update()
             show_message(self.page, 1, "Automação finalizada!")
