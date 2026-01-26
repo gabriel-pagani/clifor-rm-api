@@ -162,7 +162,7 @@ class HomeView:
                 
                 cnpj_exists = execute_query("SELECT TOP 1 CODCFO FROM FCFO WHERE CODCOLIGADA IN (1,5,6) AND CGCCFO = ?", (formatted_cnpj,))
                 if cnpj_exists:
-                    add_log(f"O cliente/fornecedor {formatted_cnpj} já está cadastrado! CODCFO: {cnpj_exists[0][0]}", "warning")
+                    add_log(f"O cliente/fornecedor {formatted_cnpj} já está cadastrado! CODCFO: {cnpj_exists[0][0]}", "info")
                     await asyncio.sleep(0.1)
                     continue
                 
