@@ -154,8 +154,17 @@ class HomeView:
             
             len_customers_vendors = len(self.customers_vendors)
             for i, (cnpj, infos) in enumerate(self.customers_vendors.items()):
-                add_log(f"Cadastrando o cliente/fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}...", "info")
+                formatted_cnpj = f"{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}"
+                
+                add_log(f"Cadastrando o cliente/fornecedor {formatted_cnpj}...", "info")
                 await asyncio.sleep(0.1)
+                
+                
+                cnpj_exists = execute_query("SELECT TOP 1 CGCCFO FROM FCFO WHERE CODCOLIGADA IN (1,5,6) AND CGCCFO = ?", (formatted_cnpj,))
+                if cnpj_exists:
+                    add_log(f"O cliente/fornecedor {formatted_cnpj} já está cadastrado!", "info")
+                    await asyncio.sleep(0.1)
+                    continue
                 
                 try:
                     data = execute_query("""
