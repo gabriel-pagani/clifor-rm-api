@@ -239,7 +239,7 @@ class HomeView:
             options=[
                 ft.dropdown.Option("c", "Cliente"),
                 ft.dropdown.Option("f", "Fornecedor"),
-                ft.dropdown.Option("a", "Ambos"),
+                # ft.dropdown.Option("a", "Ambos"),
             ]
         )
 
