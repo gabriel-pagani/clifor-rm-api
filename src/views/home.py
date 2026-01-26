@@ -49,6 +49,7 @@ class HomeView:
 
         def add_cnpj_to_list(e):
             cnpj_input.error = None
+            ie_input.error = None
             type_input.error_text = None
             
             has_error = False
@@ -64,6 +65,11 @@ class HomeView:
             if cnpj_input.value and not is_valid_cnpj(cnpj_input.value):
                 cnpj_input.error = "Cnpj inválido!"
                 has_error = True
+
+            ie_value = (ie_input.value or "").strip().lower()
+            if ie_value and not (ie_value == "isento" or ie_value.isdigit()):
+                ie_input.error = "Inscrição estadual inválida!"
+                has_error = True
             
             if not type_input.value:
                 type_input.error_text = "Campo obrigatório!"
@@ -71,6 +77,7 @@ class HomeView:
 
             if has_error:
                 cnpj_input.update()
+                ie_input.update()
                 type_input.update()
                 return
 
