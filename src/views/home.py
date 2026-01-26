@@ -159,11 +159,11 @@ class HomeView:
                     """)
                     codcfo = data[0][0] if infos["type"].lower() == "f" else (data[0][1] if infos["type"].lower() == "c" else data[0][2])
                     
+                    resp = cnpj_lookup(codcfo=codcfo, cnpj=cnpj, ie=infos["ie"])
+                    
                     for idx in ["1", "5", "6"]:
-                        resp = cnpj_lookup(codcoligada=idx, codcfo=codcfo, cnpj=cnpj, ie=infos["ie"])
-
                         create_new_customer_vendor(
-                            companyId=resp["companyId"],
+                            companyId=idx,
                             code=resp["code"],
                             shortName=resp["shortName"],
                             name=resp["name"],
