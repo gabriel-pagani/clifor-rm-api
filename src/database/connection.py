@@ -10,12 +10,16 @@ def get_connection() -> pyodbc.connect:
     return pyodbc.connect(connection_string)
 
 
-def execute_query(query: str) -> dict:
+def execute_query(query: str, params = None) -> dict:
     try:
         with get_connection().cursor() as cursor:
-            cursor.execute(query)
-            data = cursor.fetchall()
-            return data
+            if params is not None:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+
+            if cursor.description is not None:
+                return cursor.fetchall()
 
     except Exception as e:
         raise e
