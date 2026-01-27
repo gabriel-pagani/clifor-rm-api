@@ -47,6 +47,16 @@ class HomeView:
 
             self.page.update()
 
+        def on_cnpj_input_change(e):
+            def only_digits(value: str, max_len: int | None = None) -> str:
+                digits = re.sub(r"\D", "", value or "")
+                return digits[:max_len] if max_len else digits
+            
+            new_value = only_digits(cnpj_input.value, max_len=14)
+            if cnpj_input.value != new_value:
+                cnpj_input.value = new_value
+                cnpj_input.update()
+
         def add_cnpj_to_list(e):
             cnpj_input.error = None
             ie_input.error = None
@@ -255,6 +265,7 @@ class HomeView:
             expand=True,
             border_color=ft.Colors.GREY_300,
             focused_border_color=ft.Colors.GREY_300,
+            on_change=on_cnpj_input_change,
             on_submit=add_cnpj_to_list,
         )
 
@@ -263,6 +274,7 @@ class HomeView:
             expand=True,
             border_color=ft.Colors.GREY_300,
             focused_border_color=ft.Colors.GREY_300,
+            on_change=...,
             on_submit=add_cnpj_to_list,
         )
 
