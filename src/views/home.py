@@ -48,11 +48,7 @@ class HomeView:
             self.page.update()
 
         def on_cnpj_input_change(e):
-            def only_digits(value: str, max_len: int | None = None) -> str:
-                digits = re.sub(r"\D", "", value or "")
-                return digits[:max_len] if max_len else digits
-            
-            new_value = only_digits(cnpj_input.value, max_len=14)
+            new_value = re.sub(r"\D", "", cnpj_input.value or "")
             if cnpj_input.value != new_value:
                 cnpj_input.value = new_value
                 cnpj_input.update()
