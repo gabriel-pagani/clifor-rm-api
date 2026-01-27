@@ -31,6 +31,7 @@ def cnpj_lookup(codcfo: str, cnpj: str, ie: str = ""):
         "streetType": format_street(resp["logradouro"])[0],
         "streetName": format_street(resp["logradouro"])[1],
         "number": format_number(resp["numero"]),
+        "complement": resp["complemento"].title().strip(),
         "districtType": format_district(resp["bairro"])[0],
         "district": format_district(resp["bairro"])[1],
         "stateCode": resp["uf"].upper().strip(),
