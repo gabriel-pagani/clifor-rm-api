@@ -200,9 +200,10 @@ class HomeView:
                         )
 
                     execute_query(
-                        "UPDATE FCFO SET CONTRIBUINTE = ? WHERE CODCOLIGADA IN (1,5,6) AND CGCCFO = ?", 
+                        "UPDATE FCFO SET CONTRIBUINTE = ?, COMPLEMENTO = ? WHERE CODCOLIGADA IN (1,5,6) AND CGCCFO = ?", 
                         (
                             resp["contributor"], 
+                            resp["complement"] if resp["complement"] else None, 
                             formatted_cnpj
                         )
                     )
