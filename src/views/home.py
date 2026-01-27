@@ -1,5 +1,5 @@
 import flet as ft
-import time
+import re
 import datetime
 import asyncio
 from utils.ui import show_message
@@ -54,28 +54,35 @@ class HomeView:
             
             has_error = False
 
-            if not cnpj_input.value:
+            raw_cnpj = (cnpj_input.value or "").strip()
+            cnpj_digits = re.sub(r"\D", "", raw_cnpj)
+
+            raw_ie = (ie_input.value or "").strip()
+            ie_digits = re.sub(r"\D", "", raw_ie)
+            ie_sanitized = "isento" if raw_ie.lower() == "isento" else ie_digits
+
+            if not cnpj_digits:
                 cnpj_input.error = "Campo obrigatório!"
                 has_error = True
 
-            if cnpj_input.value in self.customers_vendors:
+            if cnpj_digits and cnpj_digits in self.customers_vendors:
                 cnpj_input.error = "Esse cnpj já foi adicionado!"
                 has_error = True
 
-            if cnpj_input.value and not is_valid_cnpj(cnpj_input.value):
+            if cnpj_digits and not is_valid_cnpj(cnpj_digits):
                 cnpj_input.error = "Cnpj inválido!"
                 has_error = True
 
-            ie_value = (ie_input.value or "").strip().lower()
-            if ie_value and ie_value != "isento":
-                if any((cnpj.get("ie") or "").strip().lower() == ie_value for cnpj in self.customers_vendors.values()):
-                    ie_input.error = "Essa inscrição estadual já foi utilizada!"
+            if ie_sanitized and ie_sanitized != "isento":
+                if not ie_sanitized.isdigit():
+                    ie_input.error = "Inscrição estadual inválida!"
                     has_error = True
+                else:
+                    if any((re.sub(r"\D", "", (item.get("ie") or "")) == ie_sanitized)
+                           for item in self.customers_vendors.values()):
+                        ie_input.error = "Essa inscrição estadual já foi utilizada!"
+                        has_error = True
 
-            if ie_value and not (ie_value == "isento" or ie_value.isdigit()):
-                ie_input.error = "Inscrição estadual inválida!"
-                has_error = True
-            
             if not type_input.value:
                 type_input.error_text = "Campo obrigatório!"
                 has_error = True
@@ -86,9 +93,8 @@ class HomeView:
                 type_input.update()
                 return
 
-
-            self.customers_vendors[cnpj_input.value.strip()] = {
-                "ie": ie_input.value.strip() if ie_input.value else "",
+            self.customers_vendors[cnpj_digits] = {
+                "ie": ie_sanitized,
                 "type": type_input.value
             }
             
@@ -249,7 +255,6 @@ class HomeView:
             expand=True,
             border_color=ft.Colors.GREY_300,
             focused_border_color=ft.Colors.GREY_300,
-            input_filter=ft.NumbersOnlyInputFilter(),
             on_submit=add_cnpj_to_list,
         )
 
