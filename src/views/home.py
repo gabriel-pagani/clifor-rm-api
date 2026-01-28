@@ -188,7 +188,10 @@ class HomeView:
                 
                 cnpj_exists = execute_query("SELECT TOP 1 CODCFO FROM FCFO WHERE CODCOLIGADA IN (1,5,6) AND CGCCFO = ?", (formatted_cnpj,))
                 if cnpj_exists:
-                    add_log(f"O cliente/fornecedor {formatted_cnpj} já está cadastrado! CODCFO: {cnpj_exists[0][0]}", "info")
+                    if infos["type"].lower() == "c":
+                        add_log(f"O cliente {formatted_cnpj} já está cadastrado! CODCFO: {cnpj_exists[0][0]}", "info")
+                    elif infos["type"].lower() == "f":
+                        add_log(f"O fornecedor {formatted_cnpj} já está cadastrado! CODCFO: {cnpj_exists[0][0]}", "info")
                     await asyncio.sleep(0.1)
                     continue
                 
@@ -234,10 +237,16 @@ class HomeView:
                         )
                     )
 
-                    add_log(f"Sucesso ao cadastrar o cliente/fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! CODCFO: {codcfo}", "success")
+                    if infos["type"].lower() == "c":
+                        add_log(f"Sucesso ao cadastrar o cliente {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! CODCFO: {codcfo}", "success")
+                    elif infos["type"].lower() == "f":
+                        add_log(f"Sucesso ao cadastrar o fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! CODCFO: {codcfo}", "success")
 
                 except Exception as e:
-                    add_log(f"Erro ao cadastrar o cliente/fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! ERRO: {e}", "error")
+                    if infos["type"].lower() == "c":
+                        add_log(f"Erro ao cadastrar o cliente {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! ERRO: {e}", "error")
+                    elif infos["type"].lower() == "f":
+                        add_log(f"Erro ao cadastrar o fornecedor {cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}! ERRO: {e}", "error")
                 
                 await asyncio.sleep(0.1)
                 
