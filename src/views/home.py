@@ -179,7 +179,10 @@ class HomeView:
             for i, (cnpj, infos) in enumerate(self.customers_vendors.items()):
                 formatted_cnpj = f"{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}"
                 
-                add_log(f"Cadastrando o cliente/fornecedor {formatted_cnpj}...", "info")
+                if infos["type"].lower() == "c":
+                    add_log(f"Cadastrando o cliente {formatted_cnpj}...", "info")
+                elif infos["type"].lower() == "f":
+                    add_log(f"Cadastrando o fornecedor {formatted_cnpj}...", "info")
                 await asyncio.sleep(0.1)
                 
                 
