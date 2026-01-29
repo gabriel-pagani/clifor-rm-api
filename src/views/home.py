@@ -3,6 +3,7 @@ import re
 import datetime
 import asyncio
 import json
+import os
 from utils.ui import show_message
 from utils.validator import is_valid_cnpj
 from apis.receitaws import cnpj_lookup
@@ -120,10 +121,14 @@ class HomeView:
         async def import_cnpjs_to_list(e):
             try:
                 file = await ft.FilePicker().pick_files(
+                    initial_directory="",
                     file_type=ft.FilePickerFileType.CUSTOM, 
                     allowed_extensions=["json"], 
                     allow_multiple=False
                 )
+
+                if not file:
+                    return
                 
                 with open(file[0].path, "r", encoding="utf-8") as f:
                     cnpjs_list = json.load(f)
