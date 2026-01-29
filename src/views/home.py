@@ -312,6 +312,14 @@ class HomeView:
             on_click=add_cnpj_to_list,
         )
 
+        import_cnpjs_button = ft.IconButton(
+            icon=ft.Icons.UPLOAD,
+            icon_color=ft.Colors.BLUE,
+            icon_size=40,
+            tooltip="Importar lista de cnpjs",
+            on_click=...,
+        )
+
         start_automation_button = ft.Button(
             content=ft.Text("Iniciar automação"),
             height=50,
@@ -342,6 +350,7 @@ class HomeView:
                 ie_input,
                 type_input,
                 add_cnpj_button,
+                import_cnpjs_button,
             ],
             alignment=ft.MainAxisAlignment.CENTER
         )
