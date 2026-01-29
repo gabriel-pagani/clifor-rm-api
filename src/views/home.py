@@ -117,7 +117,11 @@ class HomeView:
             show_message(self.page, 1, "Cnpj adicionado com sucesso!")
 
         async def import_cnpjs_to_list(e):
-            file = await ft.FilePicker().pick_files(file_type=ft.FilePickerFileType.CUSTOM, allowed_extensions=["json"], allow_multiple=False)
+            try:
+                file = await ft.FilePicker().pick_files(file_type=ft.FilePickerFileType.CUSTOM, allowed_extensions=["json"], allow_multiple=False)
+            except Exception as e:
+                show_message(self.page, 3, f"Erro ao importar lista de cnpjs: {e}")
+                return
             ...
 
         def remove_cnpj_from_list(cnpj):
