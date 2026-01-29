@@ -121,7 +121,7 @@ class HomeView:
         async def import_cnpjs_to_list(e):
             try:
                 file = await ft.FilePicker().pick_files(
-                    initial_directory="",
+                    initial_directory=os.path.join(os.path.abspath(""), "src", "assets"),
                     file_type=ft.FilePickerFileType.CUSTOM, 
                     allowed_extensions=["json"], 
                     allow_multiple=False
