@@ -4558,6 +4558,7 @@ municipalities = {
     ("JOSE BOITEUX", "SC"): "09151",
     ("JUPIA", "SC"): "09177",
     ("LACERDOPOLIS", "SC"): "09201",
+    ("LAGEADO", "RS"): "",
     ("LAGES", "SC"): "09300",
     ("LAGUNA", "SC"): "09409",
     ("LAJEADO GRANDE", "SC"): "09458",
